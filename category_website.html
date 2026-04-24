@@ -369,20 +369,22 @@
                     <a href="category_website.html"
                         class="flex flex-col items-center gap-1.5 px-3 py-2 rounded-xl hover:bg-orange-50 transition group cursor-pointer">
                         <span
-                            class="w-10 h-10 border border-brand bg-white rounded-full flex items-center justify-center group-hover:scale-110 transition shadow-sm"><i
-                                class="fas fa-fire text-brand text-[16px] animate-pulse"></i></span>
-                        <span class="text-[12px] font-bold text-brand whitespace-nowrap">Flash Deal</span>
+                            class="w-10 h-10 border border-transparent bg-transparent rounded-full flex items-center justify-center group-hover:border-brand group-hover:scale-110 group-hover:bg-white transition group-hover:shadow-sm"><i
+                                class="fas fa-fire text-gray-500 text-[18px] group-hover:text-brand transition"></i></span>
+                        <span class="text-[12px] font-medium text-gray-700 group-hover:text-brand group-hover:font-bold whitespace-nowrap">Flash Deal</span>
                     </a>
                     <template x-for="(c, idx) in cats">
                         <a href="category_website.html"
                             class="flex flex-col items-center gap-1.5 px-3 py-2 rounded-xl hover:bg-orange-50 transition group cursor-pointer">
                             <span
-                                class="w-10 h-10 border border-transparent bg-transparent rounded-full flex items-center justify-center group-hover:border-brand group-hover:scale-110 group-hover:bg-white transition group-hover:shadow-sm">
-                                <i class="text-[18px] text-gray-500 group-hover:text-brand transition"
-                                    :class="'fa-solid fa-'+c.i"></i>
+                                class="w-10 h-10 rounded-full flex items-center justify-center group-hover:scale-110 transition"
+                                :class="c.name === 'Vui chơi Giải trí' ? 'border border-brand bg-white shadow-sm' : 'border border-transparent bg-transparent group-hover:border-brand group-hover:bg-white group-hover:shadow-sm'">
+                                <i class="transition"
+                                    :class="[ 'fa-solid fa-'+c.i, c.name === 'Vui chơi Giải trí' ? 'text-brand text-[16px] font-bold' : 'text-[18px] text-gray-500 group-hover:text-brand' ]"></i>
                             </span>
                             <span
-                                class="text-[12px] font-medium text-gray-700 group-hover:text-brand group-hover:font-bold whitespace-nowrap"
+                                class="text-[12px] whitespace-nowrap group-hover:text-brand group-hover:font-bold"
+                                :class="c.name === 'Vui chơi Giải trí' ? 'font-bold text-brand' : 'font-medium text-gray-700'"
                                 x-text="c.name"></span>
                         </a>
                     </template>
