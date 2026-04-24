@@ -7,7 +7,20 @@ const getTapgoData = () => {
         currentSortTab: 'eVoucher',
         loc: 'Toàn quốc',
         openLoc: false,
-        activeCat: 'Flash Deal',
+        activeCat: localStorage.getItem('tapgo_activeCat') || 'Flash Deal',
+
+        // Gọi khi click danh mục từ trang chủ → chuyển sang category_website.html
+        goToCat(name) {
+            localStorage.setItem('tapgo_activeCat', name);
+            window.location.href = 'category_website.html';
+        },
+
+        // Gọi khi click danh mục trong chính trang category (chỉ đổi active, không chuyển trang)
+        switchCat(name) {
+            this.activeCat = name;
+            localStorage.setItem('tapgo_activeCat', name);
+        },
+
         cats: [
             { name: 'Tất cả', i: 'th-large', bg: 'bg-orange-50', col: 'text-brand' },
             { name: 'Vui chơi Giải trí', i: 'gamepad', bg: 'bg-pink-50', col: 'text-pink-500' },

@@ -364,7 +364,7 @@
             <div class="container mx-auto max-w-[1280px] px-4 overflow-x-auto relative pb-1 pt-1"
                 style="scrollbar-width: thin; scrollbar-color: #E5E7EB transparent;">
                 <div class="flex items-center justify-between gap-6 min-w-max md:min-w-full px-2">
-                    <a href="javascript:void(0)" @click="activeCat = 'Flash Deal'"
+                    <a href="javascript:void(0)" @click="goToCat('Flash Deal')"
                         class="flex flex-col items-center gap-1.5 px-3 py-2 rounded-xl transition group cursor-pointer relative"
                         :class="activeCat === 'Flash Deal' ? 'bg-orange-50' : 'hover:bg-orange-50'">
                         <span class="w-11 h-11 rounded-full flex items-center justify-center transition-all"
@@ -376,7 +376,7 @@
                               :class="activeCat === 'Flash Deal' ? 'text-brand font-bold' : 'text-gray-600 group-hover:text-brand group-hover:font-semibold'">Flash Deal</span>
                     </a>
                     <template x-for="(c, idx) in cats">
-                        <a href="javascript:void(0)" @click="activeCat = c.name"
+                        <a href="javascript:void(0)" @click="goToCat(c.name)"
                             class="flex flex-col items-center gap-1.5 px-3 py-2 rounded-xl transition group cursor-pointer"
                             :class="activeCat === c.name ? 'bg-orange-50' : 'hover:bg-orange-50'">
                             <span class="w-11 h-11 rounded-full flex items-center justify-center transition-all"
