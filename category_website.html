@@ -688,14 +688,14 @@
 
                 <!-- CATEGORY GRID -> 4 columns per row -->
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                    <!-- Alpine rendered remaining vouchers -->
-                    <template x-for="(v, vi) in Array.from({length: 16})" :key="vi">
+                    <!-- Dynamic products based on activeCat -->
+                    <template x-for="(v, vi) in currentCatProducts" :key="vi">
                         <a href="product_detail.html"
                             class="bg-white rounded-[1.2rem] flex flex-col relative shadow-[0_2px_12px_rgba(0,0,0,0.04)] border border-gray-100 group overflow-visible w-full hover:-translate-y-1 hover:shadow-[0_20px_40px_-10px_rgba(244,129,51,0.15)] transition-all duration-300">
                             <div class="absolute top-3 left-3 z-20 flex gap-2">
                                 <span
                                     class="bg-gradient-to-r from-orange-500 to-danger text-white text-[10px] font-bold px-2 py-1 rounded shadow-sm"
-                                    x-show="vi < 4">🔥 HOT DEAL</span>
+                                    x-show="vi < 2">🔥 HOT DEAL</span>
                             </div>
                             <div class="absolute top-3 right-3 z-20" x-show="vi % 2 === 0">
                                 <span class="font-bold text-[9px] px-2 py-1 rounded shadow-md"
@@ -703,57 +703,43 @@
                                     <i class="fas fa-crown text-[8px]"></i> GOLD
                                 </span>
                             </div>
-                            <div
-                                class="relative overflow-hidden aspect-[4/3] rounded-t-[1.2rem] bg-gray-100 z-10 w-full">
-                                <img :src="['https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?q=80&w=600&auto=format&fit=crop','https://images.unsplash.com/photo-1536440136628-849c177e76a1?q=80&w=600&auto=format&fit=crop','https://images.unsplash.com/photo-1560750588-73207b1ef5b8?q=80&w=600&auto=format&fit=crop','https://images.unsplash.com/photo-1511882150382-421056c89033?q=80&w=600&auto=format&fit=crop','https://images.unsplash.com/photo-1514525253161-7a46d19cd819?q=80&w=600&auto=format&fit=crop'][vi%5]"
+                            <div class="relative overflow-hidden aspect-[4/3] rounded-t-[1.2rem] bg-gray-100 z-10 w-full">
+                                <img :src="v.img" :alt="v.title"
                                     class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
                             </div>
                             <div class="relative h-0 z-30">
-                                <div
-                                    class="absolute -top-5 left-4 w-10 h-10 bg-white rounded-full flex items-center justify-center p-1 shadow-md border border-gray-100">
-                                    <img :src="['https://cdn.dealtoday.vn/img/s150x150/cgv_13032026142551.jpg?sign=9jYod5UnyYijJYC3ZBfNfw','https://cdn.dealtoday.vn/img/s150x150/lotte-cinema-Logo_13112023171611.jpg?sign=dgb-aeD0hxDUwvwtDP818g'][vi%2]"
-                                        class="w-full h-full object-cover rounded-full aspect-square">
+                                <div class="absolute -top-5 left-4 w-10 h-10 bg-white rounded-full flex items-center justify-center p-1.5 shadow-md border border-gray-100">
+                                    <i class="fas fa-store text-brand text-sm"></i>
                                 </div>
                             </div>
-                            <div
-                                class="px-5 pt-7 pb-5 flex-1 flex flex-col relative z-20 bg-transparent rounded-b-[1.2rem]">
-                                <span class="text-[10px] text-gray-500 font-bold uppercase"
-                                    x-text="['CGV CINEMAS', 'LOTTE CINEMA', 'GALAXY BOWLING', 'KIDZANIA', 'VINKE & AQUARIUM'][vi%5] + ' &middot; ĐÀ NẴNG'"></span>
-                                <h3 class="font-bold text-[15px] text-gray-900 leading-snug mt-1.5 mb-2 group-hover:text-brand transition"
-                                    x-text="['Vé Xem Phim 2D Cuối Tuần – Tất Cả Cụm Rạp','Combo Phim + Bắp Nước Siêu Tiết Kiệm','Trọn Gói Bowling 2 Giờ Cuối Tuần','Vé Trải Nghiệm KidZania Cho Trẻ Em','Vé Vào Cổng Khu Vui Chơi VinKE','Karaoke 3 Giờ Phòng VIP – Miễn Phí Nước','Vé Escape Room Nhóm 4-6 Người','Combo Board Game Café Cả Ngày','Vé Công Viên Nước Đà Nẵng','Trọn Gói Bi-a + Đồ Uống 2 Giờ','Vé Xem Phim IMAX 3D Đặc Biệt','Combo Giải Trí Gia Đình Cuối Tuần','Karaoke Premium 5 Giờ Hát Thả Ga','Vé Aquarium & Thủy Cung Lớn Nhất','Trọn Gói Laser Tag Nhóm 8 Người','Vé Trượt Băng Ice Rink Quanh Năm'][vi]"></h3>
+                            <div class="px-5 pt-7 pb-5 flex-1 flex flex-col relative z-20 bg-transparent rounded-b-[1.2rem]">
+                                <span class="text-[10px] text-gray-500 font-bold uppercase" x-text="v.brand + ' · ' + loc"></span>
+                                <h3 class="font-bold text-[15px] text-gray-900 leading-snug mt-1.5 mb-2 group-hover:text-brand transition truncate-2-lines" x-text="v.title"></h3>
                                 <div class="flex items-center gap-1.5 mb-3">
                                     <i class="fas fa-star text-yellow-500 text-[11px]"></i>
-                                    <span class="text-[12px] font-bold text-gray-700">4.9</span>
+                                    <span class="text-[12px] font-bold text-gray-700" x-text="v.rating"></span>
                                     <span class="text-gray-300 mx-0.5">&middot;</span>
-                                    <span class="text-[11px] text-gray-500 font-medium"
-                                        x-text="(150 + vi*14) + ' đã bán'"></span>
+                                    <span class="text-[11px] text-gray-500 font-medium" x-text="v.sold.toLocaleString() + ' đã bán'"></span>
                                 </div>
                                 <div class="flex flex-col mt-auto pt-3 border-t border-gray-100/80 gap-2">
                                     <div class="flex justify-between items-center w-full">
-                                        <span class="bg-red-50 text-danger font-bold text-[11px] px-2 py-0.5 rounded"
-                                            x-text="'Giảm ' + (20 + (vi%4)*10) + '%'"></span>
-                                        <span
-                                            class="text-gray-400 text-[11px] line-through decoration-gray-300 font-medium">1,200
-                                            TapCoin</span>
+                                        <span class="bg-red-50 text-danger font-bold text-[11px] px-2 py-0.5 rounded" x-text="'Giảm ' + v.discount + '%'"></span>
+                                        <span class="text-gray-400 text-[11px] line-through decoration-gray-300 font-medium" x-text="Math.round(v.price / (1 - v.discount/100)).toLocaleString() + ' TapCoin'"></span>
                                     </div>
                                     <div class="flex justify-between items-end w-full">
                                         <span class="text-[11px] text-gray-500 font-medium">Chỉ còn</span>
-                                        <span class="text-brand font-bold text-[16px]"><i
-                                                class="fas fa-coins text-yellow-500 mr-1 text-[12px]"></i><span
-                                                x-text="(500 + vi*50) + ''"></span></span>
+                                        <span class="text-brand font-bold text-[16px]"><i class="fas fa-coins text-yellow-500 mr-1 text-[12px]"></i><span x-text="v.price.toLocaleString()"></span></span>
                                     </div>
                                 </div>
                                 <!-- Hover Reveal CTA -->
-                                <div
-                                    class="absolute inset-x-0 bottom-0 translate-y-full opacity-0 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 rounded-b-[1.2rem] overflow-hidden bg-brand z-50">
-                                    <button
-                                        class="w-full bg-brand hover:bg-brand-hover text-white font-bold py-3.5 text-[14px] tracking-wide">XEM
-                                        CHI TIẾT DEAL</button>
+                                <div class="absolute inset-x-0 bottom-0 translate-y-full opacity-0 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 rounded-b-[1.2rem] overflow-hidden bg-brand z-50">
+                                    <button class="w-full bg-brand hover:bg-brand-hover text-white font-bold py-3.5 text-[14px] tracking-wide">XEM CHI TIẾT DEAL</button>
                                 </div>
                             </div>
                         </a>
                     </template>
                     </div>
+
                         <!-- Pagination Buttons block ends -->
 
 
