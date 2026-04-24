@@ -365,30 +365,29 @@
                 style="scrollbar-width: thin; scrollbar-color: #E5E7EB transparent;">
                 <div class="flex items-center justify-between gap-6 min-w-max md:min-w-full px-2">
                     <a href="javascript:void(0)" @click="activeCat = 'Flash Deal'"
-                        :class="activeCat === 'Flash Deal' ? 'bg-orange-50 shadow-inner' : 'hover:bg-orange-50'"
-                        class="flex flex-col items-center gap-1.5 px-3 py-2 rounded-xl transition group cursor-pointer relative">
-                        <span
-                            class="w-10 h-10 rounded-full flex items-center justify-center transition"
-                            :class="activeCat === 'Flash Deal' ? 'border border-brand bg-white shadow-sm scale-110' : 'border border-transparent bg-transparent group-hover:bg-white group-hover:scale-110 group-hover:border-brand/30 group-hover:shadow-sm'">
-                            <i class="fas fa-fire transition"
-                               :class="activeCat === 'Flash Deal' ? 'text-brand text-[16px] animate-pulse' : 'text-gray-500 text-[18px] group-hover:text-brand'"></i>
+                        class="flex flex-col items-center gap-1.5 px-3 py-2 rounded-xl transition group cursor-pointer relative"
+                        :class="activeCat === 'Flash Deal' ? 'bg-orange-50' : 'hover:bg-orange-50'">
+                        <span class="w-11 h-11 rounded-full flex items-center justify-center transition-all"
+                            :class="activeCat === 'Flash Deal' ? 'bg-orange-500 shadow-md scale-110 ring-2 ring-orange-300' : 'bg-orange-50 group-hover:bg-orange-500 group-hover:scale-105 group-hover:shadow-md'">
+                            <i class="fas fa-fire text-[17px] transition-all"
+                               :class="activeCat === 'Flash Deal' ? 'text-white' : 'text-orange-400 group-hover:text-white'"></i>
                         </span>
-                        <span class="text-[12px] whitespace-nowrap transition"
-                              :class="activeCat === 'Flash Deal' ? 'font-bold text-brand' : 'font-medium text-gray-700 group-hover:text-brand group-hover:font-bold'">Flash Deal</span>
+                        <span class="text-[11.5px] whitespace-nowrap font-medium transition"
+                              :class="activeCat === 'Flash Deal' ? 'text-brand font-bold' : 'text-gray-600 group-hover:text-brand group-hover:font-semibold'">Flash Deal</span>
                     </a>
                     <template x-for="(c, idx) in cats">
                         <a href="javascript:void(0)" @click="activeCat = c.name"
-                            :class="activeCat === c.name ? 'bg-orange-50 shadow-inner' : 'hover:bg-orange-50'"
-                            class="flex flex-col items-center gap-1.5 px-3 py-2 rounded-xl transition group cursor-pointer">
-                            <span
-                                class="w-10 h-10 rounded-full flex items-center justify-center transition"
-                                :class="activeCat === c.name ? 'border border-brand bg-white shadow-sm scale-110' : 'border border-transparent bg-transparent group-hover:border-brand/30 group-hover:bg-white group-hover:scale-110 group-hover:shadow-sm'">
-                                <i class="transition"
-                                    :class="[ 'fa-solid fa-'+c.i, activeCat === c.name ? 'text-brand text-[16px] font-bold' : 'text-[18px] text-gray-500 group-hover:text-brand' ]"></i>
+                            class="flex flex-col items-center gap-1.5 px-3 py-2 rounded-xl transition group cursor-pointer"
+                            :class="activeCat === c.name ? 'bg-orange-50' : 'hover:bg-orange-50'">
+                            <span class="w-11 h-11 rounded-full flex items-center justify-center transition-all"
+                                :class="activeCat === c.name ? 'bg-orange-500 shadow-md scale-110 ring-2 ring-orange-300' : [c.bg, 'group-hover:bg-orange-500 group-hover:scale-105 group-hover:shadow-md']"
+                            >
+                                <i class="text-[17px] transition-all"
+                                    :class="[activeCat === c.name ? 'text-white fa-solid fa-'+c.i : c.col+' fa-solid fa-'+c.i, 'group-hover:text-white']"
+                                ></i>
                             </span>
-                            <span
-                                class="text-[12px] whitespace-nowrap transition"
-                                :class="activeCat === c.name ? 'font-bold text-brand' : 'font-medium text-gray-700 group-hover:text-brand group-hover:font-bold'"
+                            <span class="text-[11.5px] whitespace-nowrap font-medium transition"
+                                :class="activeCat === c.name ? 'text-brand font-bold' : 'text-gray-600 group-hover:text-brand group-hover:font-semibold'"
                                 x-text="c.name"></span>
                         </a>
                     </template>
