@@ -27,10 +27,11 @@ const getTapgoData = () => {
             }
         },
 
-        // Gọi khi click danh mục trong chính trang category (chỉ đổi active, không chuyển trang)
+        // Gọi khi click danh mục trong chính trang category (đổi active + scroll về đầu trang)
         switchCat(name) {
             this.activeCat = name;
             localStorage.setItem('tapgo_activeCat', name);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         },
 
         cats: [
