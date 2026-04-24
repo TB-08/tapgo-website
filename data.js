@@ -49,6 +49,27 @@ const getTapgoData = () => {
             { name: 'Xe & Di chuyển', i: 'car', bg: 'bg-slate-100', col: 'text-slate-500' }
         ],
 
+        // Danh mục phụ theo từng danh mục chính
+        subCats: {
+            'Tất cả':                  [ { name: 'Tất cả deal', n: 845 }, { name: 'Mới nhất', n: 120 }, { name: 'Bán chạy nhất', n: 310 }, { name: 'Giảm giá sốc', n: 95 }, { name: 'Độc quyền TAPGO', n: 42 } ],
+            'Vui chơi Giải trí':       [ { name: 'Rạp chiếu phim', n: 156 }, { name: 'Khu vui chơi & Công viên', n: 98 }, { name: 'Karaoke & Bar', n: 73 }, { name: 'Bowling & Bi-a', n: 42 }, { name: 'Escape Room & Board Game', n: 35 } ],
+            'Nhà hàng Ăn uống':        [ { name: 'Buffet & Lẩu', n: 203 }, { name: 'Nhà hàng Á', n: 187 }, { name: 'Đồ uống & Trà sữa', n: 142 }, { name: 'Nhà hàng Âu – Mỹ', n: 65 }, { name: 'Ăn vặt & Street Food', n: 88 } ],
+            'Spa & Làm đẹp':           [ { name: 'Massage & Thư giãn', n: 178 }, { name: 'Chăm sóc da mặt', n: 134 }, { name: 'Làm nail', n: 96 }, { name: 'Triệt lông', n: 57 }, { name: 'Cắt & Tạo kiểu tóc', n: 112 } ],
+            'Khách sạn & Tour':        [ { name: 'Khách sạn 3–5 sao', n: 245 }, { name: 'Tour trong nước', n: 189 }, { name: 'Tour nước ngoài', n: 76 }, { name: 'Resort & Nghỉ dưỡng', n: 103 }, { name: 'Homestay & Airbnb', n: 58 } ],
+            'Làm đẹp & Skincare':      [ { name: 'Serum & Kem dưỡng', n: 321 }, { name: 'Tẩy da chết & Mask', n: 154 }, { name: 'Kem chống nắng', n: 98 }, { name: 'Nước tẩy trang', n: 67 }, { name: 'Bộ kit dưỡng da', n: 84 } ],
+            'Thể thao & Fitness':      [ { name: 'Gym & Cardio', n: 167 }, { name: 'Yoga & Pilates', n: 89 }, { name: 'Bơi lội', n: 54 }, { name: 'Cầu lông & Tennis', n: 73 }, { name: 'Thể thao ngoài trời', n: 48 } ],
+            'Mua sắm':                 [ { name: 'Siêu thị & Tiện lợi', n: 213 }, { name: 'Thời trang', n: 178 }, { name: 'Điện tử & Thiết bị', n: 95 }, { name: 'Đồ gia dụng & Nội thất', n: 67 }, { name: 'Sách & Văn phòng phẩm', n: 44 } ],
+            'Sức khỏe & Y tế':         [ { name: 'Khám sức khỏe tổng quát', n: 143 }, { name: 'Xét nghiệm & Chuẩn đoán', n: 87 }, { name: 'Nha khoa', n: 112 }, { name: 'Dinh dưỡng & Meal Prep', n: 64 }, { name: 'Vật lý trị liệu', n: 39 } ],
+            'Giáo dục & Kỹ năng':      [ { name: 'Ngoại ngữ', n: 198 }, { name: 'Lập trình & Công nghệ', n: 134 }, { name: 'Nghệ thuật & Âm nhạc', n: 76 }, { name: 'Kỹ năng mềm', n: 89 }, { name: 'Dạy nghề & Workshop', n: 57 } ],
+            'Thú cưng':                [ { name: 'Tắm & Grooming', n: 123 }, { name: 'Thú y & Khám bệnh', n: 86 }, { name: 'Thức ăn & Dinh dưỡng', n: 94 }, { name: 'Đồ chơi & Phụ kiện', n: 57 }, { name: 'Trông giữ & Khách sạn thú cưng', n: 38 } ],
+            'Xe & Di chuyển':          [ { name: 'Đặt xe công nghệ', n: 167 }, { name: 'Thuê xe tự lái', n: 78 }, { name: 'Rửa xe & Chăm sóc', n: 112 }, { name: 'Bảo dưỡng & Sửa chữa', n: 95 }, { name: 'Vé xe & Limousine', n: 53 } ],
+        },
+
+        // Getter: trả về danh mục phụ theo activeCat
+        get currentSubCats() {
+            return this.subCats[this.activeCat] || this.subCats['Tất cả'];
+        },
+
         // Dữ liệu sản phẩm theo từng danh mục
         catProducts: {
             'Vui chơi Giải trí': [
