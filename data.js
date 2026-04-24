@@ -10,11 +10,18 @@ const getTapgoData = () => {
         activeCat: localStorage.getItem('tapgo_activeCat') || 'Flash Deal',
 
         // Gọi khi click danh mục từ trang chủ → chuyển sang category_website.html
-        // Riêng Flash Deal → về trang chủ và scroll tới section Flash Deals
+        // Riêng Flash Deal → về trang chủ và scroll mượt tới section Flash Deals
         goToCat(name) {
             localStorage.setItem('tapgo_activeCat', name);
             if (name === 'Flash Deal') {
-                window.location.href = 'index.html#flash-deals';
+                const isHome = window.location.pathname.endsWith('index.html') || window.location.pathname === '/' || window.location.pathname.endsWith('home_website.html');
+                if (isHome) {
+                    // Đã ở trang chủ → scroll smooth xuống Flash Deals
+                    const el = document.getElementById('flash-deals');
+                    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                } else {
+                    window.location.href = 'index.html#flash-deals';
+                }
             } else {
                 window.location.href = 'category_website.html';
             }
