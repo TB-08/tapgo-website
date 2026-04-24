@@ -65,11 +65,10 @@
     <aside :class="sidebarOpen ? 'w-[260px]' : 'w-20'"
         class="bg-white border-r border-gray-200 h-full flex flex-col transition-all duration-300 z-20 shrink-0 shadow-[4px_0_24px_rgba(0,0,0,0.02)]">
         <div class="h-20 flex items-center justify-between px-5 border-b border-gray-100 shrink-0">
-            <h1 x-show="sidebarOpen"
-                class="text-3xl font-bold italic tracking-tighter text-gray-900 transition-opacity whitespace-nowrap">
-                TAP<span class="text-brand">GO</span> <span
-                    class="text-[10px] text-gray-400 not-italic uppercase ml-0.5 tracking-wider font-semibold">Vendor</span>
-            </h1>
+            <div x-show="sidebarOpen" class="flex items-end gap-1 transition-opacity whitespace-nowrap">
+                <img src="./assets/logo.png" alt="TAPGO" class="h-8 object-contain">
+                <span class="text-[10px] text-gray-400 uppercase font-semibold mb-1">Vendor</span>
+            </div>
             <button @click="sidebarOpen = !sidebarOpen"
                 class="text-gray-400 hover:text-brand transition w-8 h-8 rounded-full hover:bg-gray-50 flex items-center justify-center"><i
                     class="fas" :class="sidebarOpen ? 'fa-angle-left' : 'fa-bars'"></i></button>
