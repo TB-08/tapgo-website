@@ -10,9 +10,14 @@ const getTapgoData = () => {
         activeCat: localStorage.getItem('tapgo_activeCat') || 'Flash Deal',
 
         // Gọi khi click danh mục từ trang chủ → chuyển sang category_website.html
+        // Riêng Flash Deal → về trang chủ index.html
         goToCat(name) {
             localStorage.setItem('tapgo_activeCat', name);
-            window.location.href = 'category_website.html';
+            if (name === 'Flash Deal') {
+                window.location.href = 'index.html';
+            } else {
+                window.location.href = 'category_website.html';
+            }
         },
 
         // Gọi khi click danh mục trong chính trang category (chỉ đổi active, không chuyển trang)
