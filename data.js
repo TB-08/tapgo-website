@@ -9,21 +9,28 @@ const getTapgoData = () => {
         openLoc: false,
         activeCat: localStorage.getItem('tapgo_activeCat') || 'Flash Deal',
 
-        // Gọi khi click danh mục từ trang chủ → chuyển sang category_website.html
-        // Riêng Flash Deal → về trang chủ và scroll mượt tới section Flash Deals
+        // Điều hướng thông minh: 
+        // 1. Flash Deal -> Về trang chủ + Scroll tới section Flash Deals
+        // 2. Danh mục khác -> Sang category_website.html (nếu đang ở đó thì scroll lên đầu)
         goToCat(name) {
             localStorage.setItem('tapgo_activeCat', name);
+            const isHome = window.location.pathname.endsWith('index.html') || window.location.pathname === '/' || window.location.pathname.endsWith('home_website.html');
+            const isCatPage = window.location.pathname.endsWith('category_website.html');
+
             if (name === 'Flash Deal') {
-                const isHome = window.location.pathname.endsWith('index.html') || window.location.pathname === '/' || window.location.pathname.endsWith('home_website.html');
                 if (isHome) {
-                    // Đã ở trang chủ → scroll smooth xuống Flash Deals
                     const el = document.getElementById('flash-deals');
                     if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 } else {
                     window.location.href = 'index.html#flash-deals';
                 }
             } else {
-                window.location.href = 'category_website.html';
+                if (isCatPage) {
+                    // Đang ở trang category -> dùng switchCat để scroll lên đầu mượt mà
+                    this.switchCat(name);
+                } else {
+                    window.location.href = 'category_website.html';
+                }
             }
         },
 
